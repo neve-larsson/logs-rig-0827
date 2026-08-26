@@ -1,0 +1,9 @@
+name: rig
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo-plain
+        run: |
+          echo "CONTROL-LINE-PLAIN: $RIG_SENTINEL"
