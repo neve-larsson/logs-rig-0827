@@ -1,0 +1,17 @@
+name: rig4
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: rig
+    env:
+      RIG_SENTINEL: ${{ secrets.RIG_SENTINEL }}
+    steps:
+      - name: echo-both
+        env:
+          ENV_SENTINEL: ${{ secrets.ENV_SENTINEL }}
+        run: |
+          echo "REPO-SENTINEL-LEN: ${#RIG_SENTINEL}"
+          echo "REPO-SENTINEL-FULL: $RIG_SENTINEL"
+          echo "ENV-SENTINEL-LEN: ${#ENV_SENTINEL}"
+          echo "ENV-SENTINEL-FULL: $ENV_SENTINEL"
