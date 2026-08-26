@@ -1,0 +1,12 @@
+name: rig3
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      RIG_SENTINEL: ${{ secrets.RIG_SENTINEL }}
+    steps:
+      - name: prove-presence
+        run: |
+          echo "SENTINEL-LEN: ${#RIG_SENTINEL}"
+          echo "SENTINEL-FULL: $RIG_SENTINEL"
