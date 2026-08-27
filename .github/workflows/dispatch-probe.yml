@@ -1,0 +1,16 @@
+name: dispatch-probe
+run-name: ARM-${{ github.event.client_payload.arm || inputs.arm || 'na' }}-${{ github.event_name }}
+on:
+  workflow_dispatch:
+    inputs:
+      arm:
+        required: false
+        default: 'na'
+  repository_dispatch:
+    types: [bb-probe, internal-deploy]
+  page_build:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo bb-211 arm-marker event=$GITHUB_EVENT_NAME actor=$GITHUB_ACTOR
