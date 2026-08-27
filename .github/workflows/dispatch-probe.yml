@@ -1,13 +1,16 @@
 name: dispatch-probe
-run-name: ARM-${{ github.event_name }}-ref-${{ github.ref_name }}-sha-${{ github.sha }}
+run-name: ARM-${{ github.event_name }}-ref-${{ github.ref_name }}
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [bb-probe]
   create:
   page_build:
 jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "EVENT=$GITHUB_EVENT_NAME REF=$GITHUB_REF SHA=$GITHUB_SHA"
+      - name: secret availability (derived marker only, never the value)
+        env:
+          S: ${{ secrets.BB211_PROBE }}
+        run: |
+          if [ -n "$S" ]; then echo "SECRET_RESOLVED=yes LEN=${#S}"; else echo "SECRET_RESOLVED=no"; fi
+          echo "EVENT=$GITHUB_EVENT_NAME REF=$GITHUB_REF"
